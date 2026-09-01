@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AIFindr - Discover AI</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f7f8fc;
+  color:#171717;
+}
+
+header{
+  background:white;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #e5e5e5;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.launch{
+  background:#111;
+  color:white;
+  border:none;
+  padding:11px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.hero{
+  text-align:center;
+  padding:55px 20px 35px;
+}
+
+.hero h1{
+  font-size:38px;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:#666;
+  font-size:17px;
+  margin-bottom:25px;
+}
+
+.search{
+  width:100%;
+  max-width:600px;
+  padding:16px 18px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+h2{
+  margin:30px 0 18px;
+}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:12px;
+}
+
+.category{
+  background:white;
+  padding:18px 10px;
+  border-radius:12px;
+  text-align:center;
+  border:1px solid #eee;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-2px);
+}
+
+.tools{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  border:1px solid #eee;
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#666;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.tag{
+  display:inline-block;
+  background:#f0f0f0;
+  padding:5px 9px;
+  border-radius:6px;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.try{
+  display:inline-block;
+  background:#111;
+  color:white;
+  text-decoration:none;
+  padding:9px 13px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+.empty{
+  display:none;
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
+
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:#777;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:500px;
+  border-radius:16px;
+  padding:25px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  border:none;
+  background:none;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.modal-box h2{
+  margin:5px 0 10px;
+}
+
+.modal-box p{
+  color:#666;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:30px;
+  }
+
+  .launch{
+    padding:9px 11px;
+    font-size:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🤖 AIFindr</div>
+  <button class="launch" onclick="launchAI()">+ Launch Your AI</button>
+</header>
+
+<section class="hero">
+  <h1>Discover the Best AI Tools</h1>
+  <p>Find, explore and try the latest AI tools in one place.</p>
+
+  <input
+    id="search"
+    class="search"
+    type="text"
+    placeholder="🔍 Search AI tools..."
+    oninput="searchTools()"
+  >
+</section>
+
+<main class="container">
+
+<h2>Categories</h2>
+
+<div class="categories">
+
+<div class="category" onclick="filterCategory('Chat')">💬 Chat</div>
+<div class="category" onclick="filterCategory('Video')">🎬 Video</div>
+<div class="category" onclick="filterCategory('Voice')">🎙️ Voice</div>
+<div class="category" onclick="filterCategory('Image')">🎨 Image</div>
+<div class="category" onclick="filterCategory('Games')">🎮 Games</div>
+<div class="category" onclick="filterCategory('Apps')">📱 Apps</div>
+<div class="category" onclick="filterCategory('Coding')">💻 Coding</div>
+<div class="category" onclick="filterCategory('Writing')">✍️ Writing</div>
+
+</div>
+
+<h2>🔥 Trending AI</h2>
+
+<div class="tools" id="tools">
+
+<div class="card" data-name="Chat AI" data-category="Chat">
+<h3>Chat AI</h3>
+<span class="tag">💬 Chat</span>
+<p>AI assistant for answering questions and creating content.</p>
+<a class="try" onclick="showAI('Chat AI','Chat','AI assistant for questions, ideas and content creation.')">View AI →</a>
+</div>
+
+<div class="card" data-name="Video AI" data-category="Video">
+<h3>Video AI</h3>
+<span class="tag">🎬 Video</span>
+<p>Create amazing videos using artificial intelligence.</p>
+<a class="try" onclick="showAI('Video AI','Video','Create and edit videos using powerful AI tools.')">View AI →</a>
+</div>
+
+<div class="card" data-name="Image AI" data-category="Image">
+<h3>Image AI</h3>
+<span class="tag">🎨 Image</span>
+<p>Generate creative images from simple text prompts.</p>
+<a class="try" onclick="showAI('Image AI','Image','Generate creative images from text prompts.')">View AI →</a>
+</div>
+
+<div class="card" data-name="Voice AI" data-category="Voice">
+<h3>Voice AI</h3>
+<span class="tag">🎙️ Voice</span>
+<p>Create realistic AI voices and audio content.</p>
+<a class="try" onclick="showAI('Voice AI','Voice','Create realistic voices and audio using AI.')">View AI →</a>
+</div>
+
+<div class="card" data-name="Game AI" data-category="Games">
+<h3>Game AI</h3>
+<span class="tag">🎮 Games</span>
+<p>Discover AI-powered games and gaming tools.</p>
+<a class="try" onclick="showAI('Game AI','Games','Explore AI-powered games and gaming experiences.')">View AI →</a>
+</div>
+
+<div class="card" data-name="Coding AI" data-category="Coding">
+<h3>Coding AI</h3>
+<span class="tag">💻 Coding</span>
+<p>Build and improve software with AI assistance.</p>
+<a class="try" onclick="showAI('Coding AI','Coding','AI tools that help developers write and understand code.')">View AI →</a>
+</div>
+
+</div>
+
+<div id="empty" class="empty">
+No AI tools found.
+</div>
+
+<h2>🚀 Newly Launched AI Tools</h2>
+
+<div class="tools">
+
+<div class="card">
+<h3>New AI Assistant</h3>
+<span class="tag">💬 Chat</span>
+<p>A newly launched AI assistant for everyday tasks.</p>
+<a class="try" onclick="showAI('New AI Assistant','Chat','A newly launched AI assistant.')">View AI →</a>
+</div>
+
+<div class="card">
+<h3>Creative Image AI</h3>
+<span class="tag">🎨 Image</span>
+<p>Create beautiful AI-generated images.</p>
+<a class="try" onclick="showAI('Creative Image AI','Image','Create beautiful images using AI.')">View AI →</a>
+</div>
+
+</div>
+
+<h2>🆓 Free AI Tools</h2>
+
+<div class="tools">
+
+<div class="card">
+<h3>Free Writing AI</h3>
+<span class="tag">✍️ Writing</span>
+<p>Write articles, ideas and social media content with AI.</p>
+<a class="try" onclick="showAI('Free Writing AI','Writing','A free AI writing assistant.')">View AI →</a>
+</div>
+
+<div class="card">
+<h3>Free Coding AI</h3>
+<span class="tag">💻 Coding</span>
+<p>Get help with coding and programming tasks.</p>
+<a class="try" onclick="showAI('Free Coding AI','Coding','A free AI coding assistant.')">View AI →</a>
+</div>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 AIFindr — Discover. Try. Launch AI.
+</footer>
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeAI()">×</button>
+
+<h2 id="modalTitle"></h2>
+
+<span class="tag" id="modalCategory"></span>
+
+<p id="modalDescription"></p>
+
+<button class="launch" onclick="alert('AI tool link will be connected soon!')">
+Try This AI →
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function showAI(name,category,description){
+
+document.getElementById("modalTitle").innerText=name;
+
+document.getElementById("modalCategory").innerText=category;
+
+document.getElementById("modalDescription").innerText=description;
+
+document.getElementById("modal").style.display="flex";
+
+}
+
+function closeAI(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+function searchTools(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let cards=document.querySelectorAll("#tools .card");
+
+let found=0;
+
+cards.forEach(card=>{
+
+let name=card.dataset.name.toLowerCase();
+
+let category=card.dataset.category.toLowerCase();
+
+if(name.includes(input) || category.includes(input)){
+
+card.style.display="block";
+
+found++;
+
+}else{
+
+card.style.display="none";
+
+}
+
+});
+
+document.getElementById("empty").style.display=
+
+found===0 ? "block" : "none";
+
+}
+
+function filterCategory(category){
+
+document.getElementById("search").value=category;
+
+searchTools();
+
+window.scrollTo({
+
+top:document.getElementById("tools").offsetTop-80,
+
+behavior:"smooth"
+
+});
+
+}
+
+function launchAI(){
+
+alert("Launch Your AI feature is coming soon!");
+
+}
+
+</script>
+
+</body>
+</html>
