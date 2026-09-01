@@ -4,56 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AIFindr - Discover AI</title>
+<title>AIFindr - Discover AI Tools</title>
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  font-family:Arial,sans-serif;
   background:#f7f8fc;
   color:#171717;
 }
 
 header{
-  background:white;
-  padding:18px 20px;
+  background:#ffffff;
+  padding:18px 6%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border-bottom:1px solid #e5e5e5;
+  border-bottom:1px solid #eeeeee;
   position:sticky;
   top:0;
   z-index:10;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:bold;
+  font-size:25px;
+  font-weight:800;
 }
 
-.launch{
-  background:#111;
+.logo span{
+  color:#6c4df6;
+}
+
+.launch-top{
+  background:#6c4df6;
   color:white;
   border:none;
-  padding:11px 16px;
-  border-radius:8px;
+  padding:11px 18px;
+  border-radius:10px;
   font-weight:bold;
   cursor:pointer;
 }
 
 .hero{
   text-align:center;
-  padding:55px 20px 35px;
+  padding:65px 20px 45px;
 }
 
 .hero h1{
-  font-size:38px;
-  margin-bottom:12px;
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.hero h1 span{
+  color:#6c4df6;
 }
 
 .hero p{
@@ -63,47 +71,50 @@ header{
 }
 
 .search{
-  width:100%;
-  max-width:600px;
-  padding:16px 18px;
+  width:90%;
+  max-width:650px;
+  padding:16px 20px;
   border:1px solid #ddd;
-  border-radius:12px;
+  border-radius:14px;
   font-size:16px;
   outline:none;
 }
 
 .container{
-  max-width:1100px;
+  width:90%;
+  max-width:1150px;
   margin:auto;
-  padding:20px;
 }
 
-h2{
-  margin:30px 0 18px;
+.section{
+  margin:40px 0;
+}
+
+.section h2{
+  margin-bottom:20px;
+  font-size:25px;
 }
 
 .categories{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:12px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 .category{
   background:white;
-  padding:18px 10px;
-  border-radius:12px;
-  text-align:center;
-  border:1px solid #eee;
-  font-weight:bold;
+  border:1px solid #ddd;
+  padding:10px 16px;
+  border-radius:20px;
   cursor:pointer;
-  transition:.2s;
 }
 
 .category:hover{
-  transform:translateY(-2px);
+  background:#6c4df6;
+  color:white;
 }
 
-.tools{
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:18px;
@@ -111,9 +122,27 @@ h2{
 
 .card{
   background:white;
+  border:1px solid #e8e8e8;
+  border-radius:16px;
   padding:20px;
-  border-radius:14px;
-  border:1px solid #eee;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.icon{
+  width:50px;
+  height:50px;
+  border-radius:12px;
+  background:#f0edff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin-bottom:15px;
 }
 
 .card h3{
@@ -122,27 +151,33 @@ h2{
 
 .card p{
   color:#666;
+  font-size:14px;
   line-height:1.5;
-  margin-bottom:12px;
+  min-height:63px;
 }
 
 .tag{
   display:inline-block;
-  background:#f0f0f0;
+  margin:12px 0;
+  background:#f1f1f1;
   padding:5px 9px;
-  border-radius:6px;
+  border-radius:7px;
   font-size:12px;
-  margin-bottom:12px;
 }
 
 .try{
-  display:inline-block;
-  background:#111;
+  width:100%;
+  border:none;
+  background:#6c4df6;
   color:white;
-  text-decoration:none;
-  padding:9px 13px;
-  border-radius:7px;
+  padding:11px;
+  border-radius:9px;
   cursor:pointer;
+  font-weight:bold;
+}
+
+.try:hover{
+  background:#5638e8;
 }
 
 .empty{
@@ -153,19 +188,21 @@ h2{
 }
 
 footer{
+  margin-top:60px;
+  background:#171717;
+  color:white;
   text-align:center;
-  padding:40px 20px;
-  color:#777;
+  padding:30px;
 }
 
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:100;
+  background:rgba(0,0,0,.6);
   align-items:center;
   justify-content:center;
+  z-index:100;
   padding:20px;
 }
 
@@ -173,40 +210,38 @@ footer{
   background:white;
   width:100%;
   max-width:500px;
-  border-radius:16px;
-  padding:25px;
+  border-radius:18px;
+  padding:28px;
   position:relative;
 }
 
 .close{
   position:absolute;
-  right:15px;
-  top:12px;
-  border:none;
-  background:none;
+  right:18px;
+  top:15px;
   font-size:25px;
   cursor:pointer;
 }
 
 .modal-box h2{
-  margin:5px 0 10px;
+  margin-bottom:10px;
 }
 
 .modal-box p{
   color:#666;
   line-height:1.6;
-  margin-bottom:18px;
+  margin:15px 0 22px;
 }
 
-@media(max-width:600px){
-  .hero h1{
-    font-size:30px;
-  }
-
-  .launch{
-    padding:9px 11px;
-    font-size:12px;
-  }
+.launch-modal{
+  width:100%;
+  border:none;
+  background:#6c4df6;
+  color:white;
+  padding:13px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -214,151 +249,285 @@ footer{
 <body>
 
 <header>
-  <div class="logo">🤖 AIFindr</div>
-  <button class="launch" onclick="launchAI()">+ Launch Your AI</button>
+
+<div class="logo">
+AI<span>Findr</span>
+</div>
+
+<button class="launch-top" onclick="launchAI()">
++ Launch Your AI
+</button>
+
 </header>
 
-<section class="hero">
-  <h1>Discover the Best AI Tools</h1>
-  <p>Find, explore and try the latest AI tools in one place.</p>
 
-  <input
-    id="search"
-    class="search"
-    type="text"
-    placeholder="🔍 Search AI tools..."
-    oninput="searchTools()"
-  >
+<section class="hero">
+
+<h1>Discover. <span>Try. Launch AI.</span></h1>
+
+<p>Find the best AI tools for work, creativity, business and everyday life.</p>
+
+<input
+class="search"
+id="searchInput"
+type="text"
+placeholder="Search AI tools..."
+oninput="searchTools()"
+>
+
 </section>
 
-<main class="container">
+
+<div class="container">
+
+
+<section class="section">
 
 <h2>Categories</h2>
 
 <div class="categories">
 
-<div class="category" onclick="filterCategory('Chat')">💬 Chat</div>
-<div class="category" onclick="filterCategory('Video')">🎬 Video</div>
-<div class="category" onclick="filterCategory('Voice')">🎙️ Voice</div>
-<div class="category" onclick="filterCategory('Image')">🎨 Image</div>
-<div class="category" onclick="filterCategory('Games')">🎮 Games</div>
-<div class="category" onclick="filterCategory('Apps')">📱 Apps</div>
-<div class="category" onclick="filterCategory('Coding')">💻 Coding</div>
-<div class="category" onclick="filterCategory('Writing')">✍️ Writing</div>
+<button class="category" onclick="filterCategory('All')">All</button>
+<button class="category" onclick="filterCategory('Chat')">💬 Chat</button>
+<button class="category" onclick="filterCategory('Video')">🎬 Video</button>
+<button class="category" onclick="filterCategory('Image')">🖼️ Image</button>
+<button class="category" onclick="filterCategory('Design')">🎨 Design</button>
+<button class="category" onclick="filterCategory('Coding')">💻 Coding</button>
+<button class="category" onclick="filterCategory('Writing')">✍️ Writing</button>
+<button class="category" onclick="filterCategory('Business')">💼 Business</button>
+<button class="category" onclick="filterCategory('Voice')">🎙️ Voice</button>
 
 </div>
 
-<h2>🔥 Trending AI</h2>
+</section>
 
-<div class="tools" id="tools">
 
-<div class="card" data-name="Chat AI" data-category="Chat">
-<h3>Chat AI</h3>
-<span class="tag">💬 Chat</span>
-<p>AI assistant for answering questions and creating content.</p>
-<a class="try" onclick="showAI('Chat AI','Chat','AI assistant for questions, ideas and content creation.')">View AI →</a>
-</div>
+<section class="section">
 
-<div class="card" data-name="Video AI" data-category="Video">
-<h3>Video AI</h3>
-<span class="tag">🎬 Video</span>
-<p>Create amazing videos using artificial intelligence.</p>
-<a class="try" onclick="showAI('Video AI','Video','Create and edit videos using powerful AI tools.')">View AI →</a>
-</div>
+<h2>🔥 Trending AI Tools</h2>
 
-<div class="card" data-name="Image AI" data-category="Image">
-<h3>Image AI</h3>
-<span class="tag">🎨 Image</span>
-<p>Generate creative images from simple text prompts.</p>
-<a class="try" onclick="showAI('Image AI','Image','Generate creative images from text prompts.')">View AI →</a>
-</div>
+<div class="grid" id="toolsGrid">
 
-<div class="card" data-name="Voice AI" data-category="Voice">
-<h3>Voice AI</h3>
-<span class="tag">🎙️ Voice</span>
-<p>Create realistic AI voices and audio content.</p>
-<a class="try" onclick="showAI('Voice AI','Voice','Create realistic voices and audio using AI.')">View AI →</a>
-</div>
 
-<div class="card" data-name="Game AI" data-category="Games">
-<h3>Game AI</h3>
-<span class="tag">🎮 Games</span>
-<p>Discover AI-powered games and gaming tools.</p>
-<a class="try" onclick="showAI('Game AI','Games','Explore AI-powered games and gaming experiences.')">View AI →</a>
-</div>
+<div class="card" data-category="Chat" data-name="ChatGPT">
 
-<div class="card" data-name="Coding AI" data-category="Coding">
-<h3>Coding AI</h3>
-<span class="tag">💻 Coding</span>
-<p>Build and improve software with AI assistance.</p>
-<a class="try" onclick="showAI('Coding AI','Coding','AI tools that help developers write and understand code.')">View AI →</a>
-</div>
+<div class="icon">🤖</div>
+
+<h3>ChatGPT</h3>
+
+<p>AI assistant for writing, learning, coding, brainstorming and everyday tasks.</p>
+
+<span class="tag">Chat • Free</span>
+
+<button class="try"
+onclick="showAI('ChatGPT','Chat','AI assistant for writing, learning, coding, brainstorming and everyday tasks.','https://chatgpt.com/')">
+View AI →
+</button>
 
 </div>
 
-<div id="empty" class="empty">
-No AI tools found.
+
+<div class="card" data-category="Chat" data-name="Gemini">
+
+<div class="icon">✨</div>
+
+<h3>Google Gemini</h3>
+
+<p>Google's AI assistant for conversations, research, ideas and productivity.</p>
+
+<span class="tag">Chat • Free</span>
+
+<button class="try"
+onclick="showAI('Google Gemini','Chat','Google AI assistant for conversations, research, ideas and productivity.','https://gemini.google/in/')">
+View AI →
+</button>
+
 </div>
+
+
+<div class="card" data-category="Design" data-name="Canva AI">
+
+<div class="icon">🎨</div>
+
+<h3>Canva AI</h3>
+
+<p>Create designs, images and creative content using AI-powered tools.</p>
+
+<span class="tag">Design • Free</span>
+
+<button class="try"
+onclick="showAI('Canva AI','Design','Create designs, images and creative content using Canva AI.','https://www.canva.com/ai-assistant/')">
+View AI →
+</button>
+
+</div>
+
+
+<div class="card" data-category="Video" data-name="Runway">
+
+<div class="icon">🎬</div>
+
+<h3>Runway</h3>
+
+<p>Create and edit AI-generated videos with powerful creative tools.</p>
+
+<span class="tag">Video • Freemium</span>
+
+<button class="try"
+onclick="showAI('Runway','Video','Create and edit AI-generated videos with powerful creative tools.','https://runway.com/product/ai-video-generator')">
+View AI →
+</button>
+
+</div>
+
+
+<div class="card" data-category="Image" data-name="Adobe Firefly">
+
+<div class="icon">🔥</div>
+
+<h3>Adobe Firefly</h3>
+
+<p>Generate images and creative content using Adobe's generative AI.</p>
+
+<span class="tag">Image • Freemium</span>
+
+<button class="try"
+onclick="showAI('Adobe Firefly','Image','Generate images and creative content using Adobe Firefly.','https://firefly.adobe.com/')">
+View AI →
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="section">
 
 <h2>🚀 Newly Launched AI Tools</h2>
 
-<div class="tools">
+<div class="grid">
 
-<div class="card">
-<h3>New AI Assistant</h3>
-<span class="tag">💬 Chat</span>
-<p>A newly launched AI assistant for everyday tasks.</p>
-<a class="try" onclick="showAI('New AI Assistant','Chat','A newly launched AI assistant.')">View AI →</a>
+<div class="card" data-category="Writing" data-name="AI Writer">
+
+<div class="icon">✍️</div>
+
+<h3>AI Writer</h3>
+
+<p>AI-powered writing assistant for creating faster and better content.</p>
+
+<span class="tag">Writing • Free</span>
+
+<button class="try"
+onclick="showAI('AI Writer','Writing','AI-powered writing assistant for creating faster and better content.','https://chatgpt.com/')">
+View AI →
+</button>
+
 </div>
 
-<div class="card">
-<h3>Creative Image AI</h3>
-<span class="tag">🎨 Image</span>
-<p>Create beautiful AI-generated images.</p>
-<a class="try" onclick="showAI('Creative Image AI','Image','Create beautiful images using AI.')">View AI →</a>
+
+<div class="card" data-category="Voice" data-name="Voice AI">
+
+<div class="icon">🎙️</div>
+
+<h3>Voice AI</h3>
+
+<p>Explore AI-powered voice generation and audio creation tools.</p>
+
+<span class="tag">Voice • AI</span>
+
+<button class="try"
+onclick="showAI('Voice AI','Voice','Explore AI-powered voice generation and audio creation tools.','https://elevenlabs.io/')">
+View AI →
+</button>
+
 </div>
 
 </div>
+
+</section>
+
+
+<section class="section">
 
 <h2>🆓 Free AI Tools</h2>
 
-<div class="tools">
+<div class="grid">
 
-<div class="card">
-<h3>Free Writing AI</h3>
-<span class="tag">✍️ Writing</span>
-<p>Write articles, ideas and social media content with AI.</p>
-<a class="try" onclick="showAI('Free Writing AI','Writing','A free AI writing assistant.')">View AI →</a>
+<div class="card" data-category="Chat" data-name="ChatGPT Free">
+
+<div class="icon">🤖</div>
+
+<h3>ChatGPT</h3>
+
+<p>Use ChatGPT for questions, writing, ideas, learning and more.</p>
+
+<span class="tag">Free</span>
+
+<button class="try"
+onclick="showAI('ChatGPT','Chat','Use ChatGPT for questions, writing, ideas, learning and more.','https://chatgpt.com/')">
+Try AI →
+</button>
+
 </div>
 
-<div class="card">
-<h3>Free Coding AI</h3>
-<span class="tag">💻 Coding</span>
-<p>Get help with coding and programming tasks.</p>
-<a class="try" onclick="showAI('Free Coding AI','Coding','A free AI coding assistant.')">View AI →</a>
-</div>
+
+<div class="card" data-category="Chat" data-name="Gemini Free">
+
+<div class="icon">✨</div>
+
+<h3>Gemini</h3>
+
+<p>Explore Google's AI assistant for everyday tasks and ideas.</p>
+
+<span class="tag">Free</span>
+
+<button class="try"
+onclick="showAI('Google Gemini','Chat','Explore Google Gemini for everyday tasks and ideas.','https://gemini.google/in/')">
+Try AI →
+</button>
 
 </div>
 
-</main>
+</div>
+
+</section>
+
+
+<div class="empty" id="noResults">
+No AI tools found.
+</div>
+
+
+</div>
+
 
 <footer>
-© 2026 AIFindr — Discover. Try. Launch AI.
+
+<p>© 2026 AIFindr — Discover. Try. Launch AI.</p>
+
 </footer>
+
+
+<!-- MODAL -->
 
 <div class="modal" id="modal">
 
 <div class="modal-box">
 
-<button class="close" onclick="closeAI()">×</button>
+<div class="close" onclick="closeModal()">×</div>
 
-<h2 id="modalTitle"></h2>
+<h2 id="modalTitle">AI Tool</h2>
 
-<span class="tag" id="modalCategory"></span>
+<span class="tag" id="modalCategory">Category</span>
 
-<p id="modalDescription"></p>
+<p id="modalDescription">
+AI tool description
+</p>
 
-<button class="launch" onclick="alert('AI tool link will be connected soon!')">
+<button class="launch-modal" onclick="openCurrentAI()">
 Try This AI →
 </button>
 
@@ -366,78 +535,133 @@ Try This AI →
 
 </div>
 
+
 <script>
 
-function showAI(name,category,description){
+let currentAIUrl = "";
 
-document.getElementById("modalTitle").innerText=name;
+function showAI(name, category, description, url){
 
-document.getElementById("modalCategory").innerText=category;
+document.getElementById("modalTitle").innerText = name;
 
-document.getElementById("modalDescription").innerText=description;
+document.getElementById("modalCategory").innerText = category;
 
-document.getElementById("modal").style.display="flex";
+document.getElementById("modalDescription").innerText = description;
 
-}
+currentAIUrl = url;
 
-function closeAI(){
-
-document.getElementById("modal").style.display="none";
+document.getElementById("modal").style.display = "flex";
 
 }
 
-function searchTools(){
 
-let input=document.getElementById("search").value.toLowerCase();
+function openCurrentAI(){
 
-let cards=document.querySelectorAll("#tools .card");
+if(currentAIUrl){
 
-let found=0;
-
-cards.forEach(card=>{
-
-let name=card.dataset.name.toLowerCase();
-
-let category=card.dataset.category.toLowerCase();
-
-if(name.includes(input) || category.includes(input)){
-
-card.style.display="block";
-
-found++;
-
-}else{
-
-card.style.display="none";
+window.open(currentAIUrl, "_blank");
 
 }
 
-});
+}
 
-document.getElementById("empty").style.display=
 
-found===0 ? "block" : "none";
+function closeModal(){
+
+document.getElementById("modal").style.display = "none";
 
 }
+
+
+function launchAI(){
+
+alert("Launch Your AI submission feature is coming soon!");
+
+}
+
 
 function filterCategory(category){
 
-document.getElementById("search").value=category;
+let cards = document.querySelectorAll(".card");
 
-searchTools();
+let found = false;
 
-window.scrollTo({
+cards.forEach(function(card){
 
-top:document.getElementById("tools").offsetTop-80,
+if(category === "All" || card.dataset.category === category){
 
-behavior:"smooth"
+card.style.display = "block";
 
-});
+found = true;
+
+}else{
+
+card.style.display = "none";
 
 }
 
-function launchAI(){
-  window.open("https://www.google.com", "_blank");
+});
+
+document.getElementById("noResults").style.display =
+found ? "none" : "block";
+
+}
+
+
+function searchTools(){
+
+let search =
+document.getElementById("searchInput").value.toLowerCase();
+
+let cards =
+document.querySelectorAll(".card");
+
+let found = false;
+
+cards.forEach(function(card){
+
+let name =
+card.dataset.name.toLowerCase();
+
+let category =
+card.dataset.category.toLowerCase();
+
+let text =
+card.innerText.toLowerCase();
+
+if(
+name.includes(search) ||
+category.includes(search) ||
+text.includes(search)
+){
+
+card.style.display = "block";
+
+found = true;
+
+}else{
+
+card.style.display = "none";
+
+}
+
+});
+
+document.getElementById("noResults").style.display =
+found ? "none" : "block";
+
+}
+
+
+window.onclick = function(event){
+
+let modal =
+document.getElementById("modal");
+
+if(event.target === modal){
+
+closeModal();
+
 }
 
 }
